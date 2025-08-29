@@ -68,8 +68,7 @@ class Matrix {
                 for (int j = 0; j < getSizeX(); j++)
                     mat[i][j] *= scalar;
             }
-        };
-        
+        };   
 };
 
 template<typename K>

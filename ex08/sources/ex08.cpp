@@ -5,17 +5,67 @@
 typedef Vector<float> Vec;
 typedef Matrix<float> Mat;
 
-int main(void) {
+#define RED     "\033[31m"
+#define GREEN   "\033[32m"
+#define CYAN    "\033[36m"
+#define RESET   "\033[0m"
+#define BOLD    "\033[1m"
 
+int main() {
+    std::cout << CYAN << BOLD << "=== Test trace: Matrice carrée 3x3 ===" << RESET << std::endl;
     try {
-        Mat mat1({{1, 0}, {0, 1}});
-        Mat mat2({{2, -5, 0}, {4, 3, 7}, {-2, 3, 4}});
-        Mat mat3({{-2, -8, 4}, {1, -23, 4}, {0, 6, 4}});
+        Matrix<float> m({
+            {1, 2, 3},
+            {4, 5, 6},
+            {7, 8, 9}
+        });
+        std::cout << "M = \n" << m << std::endl;
+        float result = m.trace();
+        std::cout << GREEN << "trace(M) = " << RESET << result << std::endl;
+    } catch (const std::exception& e) { std::cout << RED << e.what() << RESET << std::endl; }
 
-        std::cout << mat1.trace() << std::endl;
-        std::cout << mat2.trace() << std::endl;
-        std::cout << mat3.trace() << std::endl;
-        
-    }
-    catch (std::exception &e) { std::cout << e.what() << std::endl; }
+    std::cout << CYAN << BOLD << "=== Test trace: Matrice carrée 2x2 ===" << RESET << std::endl;
+    try {
+        Matrix<float> m({
+            {-1, 2},
+            {3, 4}
+        });
+        std::cout << "M = \n" << m << std::endl;
+        float result = m.trace();
+        std::cout << GREEN << "trace(M) = " << RESET << result << std::endl;
+    } catch (const std::exception& e) { std::cout << RED << e.what() << RESET << std::endl; }
+
+    std::cout << CYAN << BOLD << "=== Test trace: Matrice non carrée 2x3 ===" << RESET << std::endl;
+    try {
+        Matrix<float> m({
+            {1, 2, 3},
+            {4, 5, 6}
+        });
+        std::cout << "M = \n" << m << std::endl;
+        float result = m.trace();
+        std::cout << GREEN << "trace(M) = " << RESET << result << std::endl;
+    } catch (const std::exception& e) { std::cout << RED << e.what() << RESET << std::endl; }
+
+    std::cout << CYAN << BOLD << "=== Test trace: Matrice identité 4x4 ===" << RESET << std::endl;
+    try {
+        Matrix<float> m({
+            {1,0,0,0},
+            {0,1,0,0},
+            {0,0,1,0},
+            {0,0,0,1}
+        });
+        std::cout << "M = \n" << m << std::endl;
+        float result = m.trace();
+        std::cout << GREEN << "trace(M) = " << RESET << result << std::endl;
+    } catch (const std::exception& e) { std::cout << RED << e.what() << RESET << std::endl; }
+
+    std::cout << CYAN << BOLD << "=== Test trace: Matrice vide ===" << RESET << std::endl;
+    try {
+        Matrix<float> m({});
+        std::cout << "M = \n" << m << std::endl;
+        float result = m.trace();
+        std::cout << GREEN << "trace(M) = " << RESET << result << std::endl;
+    } catch (const std::exception& e) { std::cout << RED << e.what() << RESET << std::endl; }
+
+    return 0;
 }

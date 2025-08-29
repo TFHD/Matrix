@@ -159,7 +159,7 @@ class Matrix {
                 size_t minor_col = 0;
                 bool is_find = false;
                 for (size_t j = 0; j < getSizeX(); j++)
-                        if (i != row - 1 && j != col - 1) {
+                    if (i != row - 1 && j != col - 1) {
                         minor[minor_row][minor_col++] = mat[i][j];
                         is_find = true;
                     }
@@ -177,6 +177,8 @@ class Matrix {
             if (!isSquare())
                 throw std::runtime_error("\e[31mError, Matrice is not a square matrix !\e[0m");
             K res = 0;
+            if (getSizeX() == 1)
+                return mat[0][0];
             if (getSizeX() == 2)
                 return std::fma(mat[0][0], mat[1][1], -std::fma(mat[0][1], mat[1][0], 0));
             for (size_t i = 0; i < getSizeY(); i++)

@@ -1,55 +1,66 @@
 #include "Matrix.hpp"
 #include "Vector.hpp"
 
-int main(void) {
+// Macros couleurs ANSI
+#define RED     "\033[31m"
+#define GREEN   "\033[32m"
+#define YELLOW  "\033[33m"
+#define CYAN    "\033[36m"
+#define RESET   "\033[0m"
+#define BOLD    "\033[1m"
 
+int main(void) {
     try {
+        std::cout << CYAN << BOLD << "[Vector add]" << RESET << std::endl;
         Vector<float> u({2, 3});
         Vector<float> v({5, 7});
-
         u.add(v);
         u.printVec();
-        std::cout << "============" << std::endl;
+        std::cout << YELLOW << "============" << RESET << std::endl;
+    } catch (std::exception &e) { std::cout << RED << e.what() << RESET << std::endl; }
 
-        Vector<float> u1({2, 3});
-        Vector<float> v1({5, 7});
+    try {
+        std::cout << CYAN << BOLD << "[Vector sub]" << RESET << std::endl;
+        Vector<float> u({2, 3});
+        Vector<float> v({5, 7});
+        u.sub(v);
+        u.printVec();
+        std::cout << YELLOW << "============" << RESET << std::endl;
+    } catch (std::exception &e) { std::cout << RED << e.what() << RESET << std::endl; }
 
-        u1.sub(v1);
-        u1.printVec();
-        std::cout << "============" << std::endl;
+    try {
+        std::cout << CYAN << BOLD << "[Vector scl]" << RESET << std::endl;
+        Vector<float> u({2, 3});
+        u.scl(2.);
+        u.printVec();
+        std::cout << YELLOW << "============" << RESET << std::endl;
+    } catch (std::exception &e) { std::cout << RED << e.what() << RESET << std::endl; }
 
-        Vector<float> u2({2, 3.34});
-
-        u2.scl(2.);
-        u2.printVec();
-        std::cout << "============" << std::endl;
-
-        Matrix<float> mat({{1, 2},
-                        {3, 4}});
-                            
-        Matrix<float> mat1({{7, 4},
-                            {-2, 2}});
-
+    try {
+        std::cout << GREEN << BOLD << "[Matrix add]" << RESET << std::endl;
+        Matrix<float> mat({{1, 2}, {3, 4}});
+        Matrix<float> mat1({{7, 4}, {-2, 2}});
         mat.add(mat1);
         mat.printMat();
+        std::cout << YELLOW << "============" << RESET << std::endl;
+    } catch (std::exception &e) { std::cout << RED << e.what() << RESET << std::endl; }
 
-        std::cout << "============" << std::endl;
+    try {
+        std::cout << GREEN << BOLD << "[Matrix sub]" << RESET << std::endl;
+        Matrix<float> mat({{1, 2}, {3, 4}});
+        Matrix<float> mat1({{7, 4}, {-2, 2}});
+        mat.sub(mat1);
+        mat.printMat();
+        std::cout << YELLOW << "============" << RESET << std::endl;
+    } catch (std::exception &e) { std::cout << RED << e.what() << RESET << std::endl; }
 
-        Matrix<float> mat2({{1, 2},
-                        {3, 4}});
-                            
-        Matrix<float> mat3({{7, 4},
-                            {-2, 2}});
-        
-        mat2.sub(mat3);
-        mat2.printMat();
+    try {
+        std::cout << GREEN << BOLD << "[Matrix scl]" << RESET << std::endl;
+        Matrix<float> mat({{100}, {3}});
+        mat.scl(2.0f);
+        mat.printMat();
+        std::cout << YELLOW << "============" << RESET << std::endl;
+    } catch (std::exception &e) { std::cout << RED << e.what() << RESET << std::endl; }
 
-        std::cout << "============" << std::endl;
-
-        Matrix<float> mat4({{100}, {3}});
-
-        mat4.scl(2.0f);
-        mat4.printMat();
-    }
-    catch (std::exception &e) { std::cout << e.what() << std::endl; }
+    return 0;
 }

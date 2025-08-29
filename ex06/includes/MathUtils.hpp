@@ -12,15 +12,15 @@ struct Math {
         return (x < 0) ? -x : x; 
     }
 
-    static int getMin(float x, float y) {
+    static float getMin(float x, float y) {
         return (x < y) ? x : y;
     }
 
-    static int getMax(float x, float y) {
+    static float getMax(float x, float y) {
         return (x > y) ? x : y;
     }
 
-    static int myAbs(double x, double y) {
+    static double myAbs(double x, double y) {
 
         x = dabs(x);
         y = dabs(y);
@@ -55,22 +55,11 @@ struct Math {
     }
 
     template <typename K>
-    static double scalarProduct(Vector<K> &vec1, Vector<K> &vec2) {
-
-        if (!vec1.isSameLength(vec2))
-            throw std::runtime_error("\e[31mError, vectors size are not the same !\e[0m");
-        double res = 0;
-        for (int i = 0; i < vec1.getSize(); i++)
-            res = std::fma(vec1[i], vec2[i], res);
-        return res; 
-    }
-
-    template <typename K>
     static double angle_cos(Vector<K> &vec1, Vector<K> &vec2) {
         double scalar_product = 0;
         double norm = 0;
 
-        scalar_product = scalarProduct(vec1, vec2);
+        scalar_product = vec1.dot(vec2);
         norm = vec1.norm() * vec2.norm();
 
         if (!norm || !vec1.norm_1() || !vec2.norm_1())

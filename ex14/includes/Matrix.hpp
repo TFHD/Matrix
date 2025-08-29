@@ -179,11 +179,11 @@ class Matrix {
         K determinant(void) {
             if (!isSquare())
                 throw std::runtime_error("\e[31mError, Matrice is not a square matrix !\e[0m");
-
+            K res = 0;
+            if (getSizeX() == 1)
+                return mat[0][0];
             if (getSizeX() == 2)
                 return std::fma(mat[0][0], mat[1][1], -std::fma(mat[0][1], mat[1][0], 0));
-                
-            K res = 0;
             for (size_t i = 0; i < getSizeY(); i++)
                 res += mat[0][i] * cofactor(1, i + 1);
             return res;

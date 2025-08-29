@@ -23,6 +23,8 @@ class Vector {
         const K& operator[](size_t idx) const { return vec[idx]; }
 
         void printVec() {
+            if (!getSize())
+                std::cout << "[]" << std::endl;
             for (int i = 0; i < getSize(); i++)
                 std::cout << std::fixed << std::setprecision(1) << "[" << vec[i] << "]" << std::endl;
         }

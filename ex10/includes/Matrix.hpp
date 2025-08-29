@@ -141,7 +141,7 @@ class Matrix {
                 row++;
             }
             return Matrix<K>(mat);
-        }  
+        }
 };
 
 template<typename K>

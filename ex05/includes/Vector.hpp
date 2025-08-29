@@ -48,7 +48,7 @@ class Vector {
         K dot(Vector<K> &vecx) {
             if (!this->isSameLength(vecx))
                 throw std::runtime_error("\e[31mError, vectors size are not de same !\e[0m");
-            K res;
+            K res = 0;
             for (int i = 0; i < vecx.getSize(); i++)
                 res = std::fma(vecx[i], this->getVec()[i], res);
             return res;

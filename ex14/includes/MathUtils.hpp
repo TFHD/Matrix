@@ -12,15 +12,15 @@ struct Math {
         return (x < 0) ? -x : x; 
     }
 
-    static int getMin(float x, float y) {
+    static float getMin(float x, float y) {
         return (x < y) ? x : y;
     }
 
-    static int getMax(float x, float y) {
+    static float getMax(float x, float y) {
         return (x > y) ? x : y;
     }
 
-    static int myAbs(double x, double y) {
+    static double myAbs(double x, double y) {
 
         x = dabs(x);
         y = dabs(y);
