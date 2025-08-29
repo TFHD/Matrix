@@ -80,22 +80,22 @@ int main(void) {
         Vector<float> v2({0.0, 1.0, 0.0});
         Vector<float> v3({0.0, 0.0, 1.0});
         std::vector<Vector<float>> vectors = {v1, v2, v3};
-        std::vector<float> coefs = {3.0, 4.0, -2.0};
+        std::vector<float> coefs = {10.0, -2.0, 0.5};
 
         Vector<float> res = linear_combination(vectors, coefs);
-        std::cout << GREEN << "linear_combination({v1,v2,v3},{3,4,-2}) = " << RESET << std::endl;
+        std::cout << GREEN << "linear_combination({v1,v2,v3},{10,-2,0.5}) = " << RESET << std::endl;
         res.printVec();
     }
 
     std::cout << CYAN << BOLD << "=== Test linear_combination: int ===" << RESET << std::endl;
     {
         Vector<int> v1({1, 2, 3});
-        Vector<int> v2({4, 5, 6});
+        Vector<int> v2({0, 10, -100});
         std::vector<Vector<int>> vectors = {v1, v2};
-        std::vector<int> coefs = {2, 3};
+        std::vector<int> coefs = {10, -2};
 
         Vector<int> res = linear_combination(vectors, coefs);
-        std::cout << GREEN << "linear_combination({v1,v2},{2,3}) = " << RESET << std::endl;
+        std::cout << GREEN << "linear_combination({v1,v2},{10,-2}) = " << RESET << std::endl;
         res.printVec();
     }
 

@@ -97,7 +97,7 @@ class Matrix {
         }
 
         Vector<K> mul_vec(Vector<K> &vec) const {
-            if (getSizeX() != vec.getSize())
+            if (getSizeX() != (size_t)vec.getSize())
                 throw std::runtime_error("Matrix multiplication: incompatible size");
             std::vector<float> res(getSizeY(), 0.0);
             for (size_t i = 0; i < (size_t)getSizeY(); ++i)
@@ -138,13 +138,13 @@ class Matrix {
                 if (pivotRow == n) continue;
                 std::swap(mat[row], mat[pivotRow]);
 
-                double pivot = mat[row][col];
+                K pivot = mat[row][col];
                 for (size_t j = col; j < m; ++j)
                     mat[row][j] /= pivot;
 
                 for (size_t i = 0; i < n; ++i) {
                     if (i != row) {
-                        double factor = mat[i][col];
+                        K factor = mat[i][col];
                         for (size_t j = col; j < m; ++j) {
                             mat[i][j] -= factor * mat[row][j];
                         }

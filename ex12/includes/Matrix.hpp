@@ -96,7 +96,7 @@ class Matrix {
         }
 
         Vector<K> mul_vec(Vector<K> &vec) const {
-            if (getSizeX() != vec.getSize())
+            if (getSizeX() != (size_t)vec.getSize())
                 throw std::runtime_error("Matrix multiplication: incompatible size");
             std::vector<float> res(getSizeY(), 0.0);
             for (size_t i = 0; i < (size_t)getSizeY(); ++i)

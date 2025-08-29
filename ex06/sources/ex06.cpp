@@ -21,7 +21,7 @@ int main(void) {
         std::cout << "v =\n" << v << std::endl;
         Vector<float> result = Math::cross_product(u, v);
         std::cout << GREEN << "cross_product(u, v) =\n" << RESET;
-        std::cout << result << std::endl; // attendu: [0, 0, 1]
+        std::cout << result << std::endl;
     } catch (const std::exception &e) { std::cout << RED << e.what() << RESET << std::endl; }
 
     std::cout << CYAN << BOLD << "=== Test cross_product: anti-commutativity ===" << RESET << std::endl;

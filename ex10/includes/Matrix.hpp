@@ -18,8 +18,8 @@ class Matrix {
     typedef std::vector<SubMat> Mat;
 
     private:
-        int sizeY = 0;
-        int sizeX = 0;
+        size_t sizeY = 0;
+        size_t sizeX = 0;
         Mat mat;
 
     public:
@@ -29,7 +29,7 @@ class Matrix {
         Matrix(Mat mat) : mat(mat) {
             sizeY = mat.size();
             for (SubMat &submat : mat) {
-                if (sizeX != 0 && sizeX != (int)submat.size()) {
+                if (sizeX != 0 && sizeX != (size_t)submat.size()) {
                     throw std::runtime_error("\e[31mError Matrice Construction\e[0m");
                     return;
                 }
@@ -37,17 +37,17 @@ class Matrix {
             }
         };
 
-        std::tuple<int, int> size() const { return {sizeX, sizeY}; }
-        int getSizeX()              const { return (sizeX); }
-        int getSizeY()              const { return (sizeY); }
+        std::tuple<size_t, size_t> size() const { return {sizeX, sizeY}; }
+        size_t getSizeX()              const { return (sizeX); }
+        size_t getSizeY()              const { return (sizeY); }
         Mat getMat()                const { return (mat); }
         bool isSquare()             const { return (sizeX == sizeY); }
         bool isSameLength(Matrix &m)const { return ((m.getSizeX() == this->getSizeX()) && (m.getSizeY() == this->getSizeY())); }
 
-        void printMat() {
-            for (int i = 0; i < getSizeY(); i++) {
+        void prsize_tMat() {
+            for (size_t i = 0; i < getSizeY(); i++) {
                 std::cout << "[";
-                for (int j = 0; j < getSizeX(); j++) {
+                for (size_t j = 0; j < getSizeX(); j++) {
                     std::cout << std::fixed << std::setprecision(1) << mat[i][j];
                     if (j + 1 != getSizeX()) std::cout << ", ";
                 }
@@ -56,21 +56,21 @@ class Matrix {
         }
         
         void add(const Matrix<K> &matx) {
-            for (int i = 0; i < getSizeY(); i++) {
-                for (int j = 0; j < getSizeX(); j++)
+            for (size_t i = 0; i < getSizeY(); i++) {
+                for (size_t j = 0; j < getSizeX(); j++)
                     mat[i][j] += matx.getMat()[i][j];
             }
         };
 
         void sub(const Matrix<K> &matx) {
-            for (int i = 0; i < getSizeY(); i++) {
-                for (int j = 0; j < getSizeX(); j++)
+            for (size_t i = 0; i < getSizeY(); i++) {
+                for (size_t j = 0; j < getSizeX(); j++)
                     mat[i][j] -= matx.getMat()[i][j];
             }
         };
         void scl(const K scalar) {
-            for (int i = 0; i < getSizeY(); i++) {
-                for (int j = 0; j < getSizeX(); j++)
+            for (size_t i = 0; i < getSizeY(); i++) {
+                for (size_t j = 0; j < getSizeX(); j++)
                     mat[i][j] *= scalar;
             }
         };
@@ -87,7 +87,7 @@ class Matrix {
         }
 
         Vector<K> mul_vec(Vector<K> &vec) const {
-            if (getSizeX() != vec.getSize())
+            if (getSizeX() != (size_t)vec.getSize())
                 throw std::runtime_error("Matrix multiplication: incompatible size");
             std::vector<float> res(getSizeY(), 0.0);
             for (size_t i = 0; i < (size_t)getSizeY(); ++i)
@@ -99,41 +99,41 @@ class Matrix {
             if (!isSquare())
                 throw std::runtime_error("\e[31mError, Matrice is not a square matrix !\e[0m");
             K res = 0;
-            for (int i = 0; i < getSizeY(); i++)
+            for (size_t i = 0; i < getSizeY(); i++)
                 res += mat[i][i];
             return res;
         }
 
         Matrix<K> transpose() const {
             Mat transpose(getSizeX(), SubMat(getSizeY(), 0.0));
-            for (int i = 0; i < getSizeX(); i++) {
-                for (int j = 0; j < getSizeY(); j++)
+            for (size_t i = 0; i < getSizeX(); i++) {
+                for (size_t j = 0; j < getSizeY(); j++)
                     transpose[i][j] = mat[j][i];
             }
             return Matrix<K>(transpose);
         }
 
-        Matrix<K> toRowEchelonForm(void) {
-            int n = getSizeY();
-            int m = getSizeX();
-            int row = 0;
+        Matrix<K> row_echelon(void) {
+            size_t n = getSizeY();
+            size_t m = getSizeX();
+            size_t row = 0;
 
             Mat mat(getMat());
-            for (int col = 0; col < m && row < n; ++col) {
-                int pivotRow = row;
+            for (size_t col = 0; col < m && row < n; ++col) {
+                size_t pivotRow = row;
 
                 while (pivotRow < n && Math::dabs(mat[pivotRow][col]) == 0) ++pivotRow;
                 if (pivotRow == n) continue;
                 std::swap(mat[row], mat[pivotRow]);
 
-                double pivot = mat[row][col];
-                for (int j = col; j < m; ++j)
+                K pivot = mat[row][col];
+                for (size_t j = col; j < m; ++j)
                     mat[row][j] /= pivot;
 
-                for (int i = 0; i < n; ++i) {
+                for (size_t i = 0; i < n; ++i) {
                     if (i != row) {
-                        double factor = mat[i][col];
-                        for (int j = col; j < m; ++j) {
+                        K factor = mat[i][col];
+                        for (size_t j = col; j < m; ++j) {
                             mat[i][j] -= factor * mat[row][j];
                         }
                     }
@@ -146,9 +146,9 @@ class Matrix {
 
 template<typename K>
 std::ostream &operator<<(std::ostream &o, const Matrix<K> &m) {
-    for (int i = 0; i < m.getSizeY(); i++) {
+    for (size_t i = 0; i < m.getSizeY(); i++) {
         o << "[";
-        for (int j = 0; j < m.getSizeX(); j++) {
+        for (size_t j = 0; j < m.getSizeX(); j++) {
             o << std::setw(7) << std::fixed << std::setprecision(4) << m.getMat()[i][j];
             if (j + 1 != m.getSizeX()) o << ", ";
         }

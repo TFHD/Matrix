@@ -33,9 +33,9 @@ int main() {
 
     std::cout << CYAN << BOLD << "=== Test inverse: Matrice 3x3 ===" << RESET << std::endl;
     Matrix<float> m3x3({
-        {3, 0, 2},
-        {2, 0, -2},
-        {0, 1, 1}
+        {8., 5., -2.},
+        {4., 7., 20.},
+        {7., 6., 1.}
     });
     std::cout << "M = \n" << m3x3 << std::endl;
     Matrix<float> inv3x3 = m3x3.inverse();

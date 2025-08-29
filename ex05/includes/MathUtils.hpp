@@ -54,9 +54,9 @@ struct Math {
     }
 
     template <typename K>
-    static double angle_cos(Vector<K> &vec1, Vector<K> &vec2) { // cos(0) = A . B / |A| * |B|
-        double scalar_product = 0;
-        double norm = 0;
+    static float angle_cos(Vector<K> &vec1, Vector<K> &vec2) { // cos(0) = A . B / |A| * |B|
+        float scalar_product = 0;
+        float norm = 0;
 
         scalar_product = vec1.dot(vec2);
         norm = vec1.norm() * vec2.norm();
