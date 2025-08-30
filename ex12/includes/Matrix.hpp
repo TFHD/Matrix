@@ -55,25 +55,28 @@ class Matrix {
             }
         }
         
-        void add(const Matrix<K> &matx) {
-            for (size_t i = 0; i < getSizeY(); i++) {
-                for (size_t j = 0; j < getSizeX(); j++)
+        void add(Matrix<K> &matx) {
+            if (!isSameLength(matx))
+                throw std::runtime_error("\e[31mMatrices havn't the same length\e[0m");
+            for (int i = 0; i < getSizeY(); i++) {
+                for (int j = 0; j < getSizeX(); j++)
                     mat[i][j] += matx.getMat()[i][j];
             }
         };
-
-        void sub(const Matrix<K> &matx) {
-            for (size_t i = 0; i < getSizeY(); i++) {
-                for (size_t j = 0; j < getSizeX(); j++)
+        void sub(Matrix<K> &matx) {
+            if (!isSameLength(matx))
+                throw std::runtime_error("\e[31mMatrices havn't the same length\e[0m");
+            for (int i = 0; i < getSizeY(); i++) {
+                for (int j = 0; j < getSizeX(); j++)
                     mat[i][j] -= matx.getMat()[i][j];
             }
         };
-        void scl(const K scalar) {
-            for (size_t i = 0; i < getSizeY(); i++) {
-                for (size_t j = 0; j < getSizeX(); j++)
+        void scl(K scalar) {
+            for (int i = 0; i < getSizeY(); i++) {
+                for (int j = 0; j < getSizeX(); j++)
                     mat[i][j] *= scalar;
             }
-        };
+        }; 
 
         void div(const K scalar) {
             if (!scalar)

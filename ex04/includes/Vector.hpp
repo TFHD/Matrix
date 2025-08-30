@@ -36,13 +36,17 @@ class Vector {
             for (int i = 0; i < getSize(); i++)
                 std::cout << std::fixed << std::setprecision(1) << "[" << vec[i] << "]" << std::endl;
         }
-        void add(const Vector<K> &vecx) {
-            for (int i = 0; i != getSize(); i++) vec[i] += vecx[i]; 
+        void add(Vector<K> &vecx) {
+            if (!isSameLength(vecx)) throw std::runtime_error("\e[31mVectors havn't the same length\e[0m");
+            for (int i = 0; i != getSize(); i++) vec[i] += vecx.getVec()[i]; 
         };
-        void sub(const Vector<K> &vecx) {
-            for (int i = 0; i != getSize(); i++) vec[i] -= vecx[i];
+
+        void sub(Vector<K> &vecx) {
+            if (!isSameLength(vecx)) throw std::runtime_error("\e[31mVectors havn't the same length\e[0m");
+            for (int i = 0; i != getSize(); i++) vec[i] -= vecx.getVec()[i];
         };
-        void scl(const K scalar) {
+
+        void scl(K scalar) {
             for (int i = 0; i != getSize(); i++) vec[i] *= scalar;
         };
         K dot(Vector<K> &vecx) {
@@ -70,7 +74,7 @@ class Vector {
         float norm_inf() {
             float res = 0;
             for (int i = 0; i < getSize(); i++)
-                res = Math::dabs(Math::getMax(vec[i], res));
+                res = Math::getMax(Math::dabs(vec[i]), res);
             return res;
         } 
 };

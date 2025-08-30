@@ -21,20 +21,24 @@ class Vector {
         Vec getVec()             const { return (vec); }
         K& operator[](size_t idx) { return vec[idx]; }
         const K& operator[](size_t idx) const { return vec[idx]; }
+        bool isSameLength(Vector<K> &v) const { return (getSize() == v.getSize()); }
 
         void printVec() {
-            if (!getSize())
-                std::cout << "[]" << std::endl;
             for (int i = 0; i < getSize(); i++)
                 std::cout << std::fixed << std::setprecision(1) << "[" << vec[i] << "]" << std::endl;
         }
-        void add(const Vector<K> &vecx) {
+        
+        void add(Vector<K> &vecx) {
+            if (!isSameLength(vecx)) throw std::runtime_error("\e[31mVectors havn't the same length\e[0m");
             for (int i = 0; i != getSize(); i++) vec[i] += vecx.getVec()[i]; 
         };
-        void sub(const Vector<K> &vecx) {
+
+        void sub(Vector<K> &vecx) {
+            if (!isSameLength(vecx)) throw std::runtime_error("\e[31mVectors havn't the same length\e[0m");
             for (int i = 0; i != getSize(); i++) vec[i] -= vecx.getVec()[i];
         };
-        void scl(const K scalar) {
+
+        void scl(K scalar) {
             for (int i = 0; i != getSize(); i++) vec[i] *= scalar;
         };
 };

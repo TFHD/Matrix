@@ -49,26 +49,28 @@ class Matrix {
                 std::cout << "]" << std::endl;
             }
         }
-        
-        void add(const Matrix<K> &matx) {
+        void add(Matrix<K> &matx) {
+            if (!isSameLength(matx))
+                throw std::runtime_error("\e[31mMatrices havn't the same length\e[0m");
             for (int i = 0; i < getSizeY(); i++) {
                 for (int j = 0; j < getSizeX(); j++)
                     mat[i][j] += matx.getMat()[i][j];
             }
         };
-
-        void sub(const Matrix<K> &matx) {
+        void sub(Matrix<K> &matx) {
+            if (!isSameLength(matx))
+                throw std::runtime_error("\e[31mMatrices havn't the same length\e[0m");
             for (int i = 0; i < getSizeY(); i++) {
                 for (int j = 0; j < getSizeX(); j++)
                     mat[i][j] -= matx.getMat()[i][j];
             }
         };
-        void scl(const K scalar) {
+        void scl(K scalar) {
             for (int i = 0; i < getSizeY(); i++) {
                 for (int j = 0; j < getSizeX(); j++)
                     mat[i][j] *= scalar;
             }
-        };   
+        };
 };
 
 template<typename K>
