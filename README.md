@@ -71,7 +71,7 @@ Le projet est organisé par exercices :
 - `exNN/sources/exNN.cpp` : Fichier source principal
 - `exNN/Makefile` : Makefile, script de compilation
 
-Les classes principales sont probablement :
+Les classes principales sont :
 - `Vector<T>` : Représentation de vecteurs génériques
 - `Matrix<T>` : Représentation de matrices génériques
 
